@@ -1,0 +1,63 @@
+﻿@*  
+    Click and Drag multi-selection rectangle with Javascript
+    http://nightlycoding.com/index.php/2014/02/click-and-drag-multi-selection-rectangle-with-javascript/
+
+    or use JQuery UI!!
+    http://jqueryui.com/selectable/
+*@
+<script>
+    $(function () {
+        $('#toggle-well-all').on('click', function (e) {
+            $('.bin-well').button('toggle')
+        }
+       );
+    }
+    );
+    $(function () {
+        $('#toggle-well-column-B').on('click', function (e) {
+            $('.bin-col-B').button('toggle')
+        }
+       );
+    }
+    );
+    $(function () {
+        $('#toggle-well-row-2').on('click', function (e) {
+            $('.bin-row-2').button('toggle')
+        }
+       );
+    }
+    );
+</script>
+
+
+<div class="grid">
+    <div class="btn-group btn-group-justified" role="group">
+        <!--Select All Button-->
+        <button id="toggle-well-all" type="button" class="btn btn-info"><i class="fa fa-table"></i></button>
+        @for (char x = 'A'; x < 'Q'; x++)
+        {
+        <!--Column Header-->
+            <button id="toggle-well-column-@x" type="button" class="btn btn-info">@x.ToString()</button>
+        }
+    </div>
+
+    @{int a = 0;
+    <!--Well Row-->
+        for (int y = 1; y < 6; y++)
+        {
+            <div class="btn-group btn-group-justified" role="group">
+                <!--Row Header-->
+                <button id="toggle-well-row-@y" type="button" class="btn btn-info">@y.ToString()</button>
+                <!--Well Column-->
+                @for (char z = 'A'; z < 'Q'; z++)
+                {
+                <!--Well Button-->
+                    <button type="button" id="select-well-@a" class="btn btn-default bin-well bin-row-@y bin-col-@z" data-toggle="button"></button>
+                    a++;
+                }
+            </div>
+        }
+    }
+</div>
+
+

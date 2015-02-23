@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Grid Demo</title>
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+    <link rel="stylesheet" href="~/Content/bootstrap.slate.min.css" />
+    <link rel="stylsheet" href="~/Content/Site.css" />
+
+
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+
+    <!--This should be at the bottom, but for demo purposes has been placed on the top-->
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.3.min.js"></script>
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Grid Sample", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+
+                    <li><a href="@Url.Action("Index", "Home")"><span class="fa fa-home"></span> Home</a></li>
+
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Grid Samples <b class="fa fa-caret-down"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("GridOne", "Grid")">Grid Sample One</a></li>
+                            <li><a href="@Url.Action("GridTwo", "Grid")">Grid Sample Two</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+    <footer id="footer">
+        <div class="container">
+            <p class="text-muted"> &copy; @DateTime.Now.Year - Grid Sample</p>
+        </div>
+    </footer>
+              
+</body>
+</html>
