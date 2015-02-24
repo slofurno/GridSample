@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "GridThree";
+}
+
+<h2>GridThree</h2>
+<script>
+    $(function () {
+        var matrix = [6, 3]; // [rows, columns]
+
+        // Create the products
+        var number_of_products = matrix[0] * matrix[1];
+        for (var i = 0; i < number_of_products; i++) {
+            $('<li>')
+                .addClass('ui-widget-content')
+                .text('Product')
+                .css('width', (100 / matrix[0]) + '%')
+                .appendTo('#products');
+        }
+
+        $('#products').selectable({
+            selected: function () {
+                // Print out the products that are selected
+                var selected_products = '';
+                $('.ui-selected', this).each(function () {
+                    var index = $(this).index() + 1;
+                    selected_products += ', #' + index;
+                });
+                selected_products = selected_products.substr(2);
+                $('#selected-products').text(selected_products);
+            }
+        });
+    });
+</script>
+<p>Selected Products: <span id="selected-products"></span></p>
+
+<ol id="products"></ol>

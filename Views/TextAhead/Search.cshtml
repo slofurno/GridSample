@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+}
+
+<head>
+    <title>Demo of Look ahead</title>
+</head>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input.typeahead').typeahead({
+            name: 'starwars',
+            local: ['Obi Wan Kenobi', 'Yoda', 'Pademe', 'Jar Jar Binks', 'Darth Sidious', 'Darth Vader', 'Luke Skywalker', 'Han Solo', 'Leia', 'Calrissian', 'Boba Fett']
+        });
+    });
+</script>
+<style>
+
+</style>
+<body>
+    <div>
+        <input type="text" autocomplete="off" spellcheck="false" />
+    </div>
+</body>
