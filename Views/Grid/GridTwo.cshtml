@@ -43,6 +43,11 @@
                     .ui-state-default[dataOn=true]{
 	background-color: #512888;
 }
+
+.select-square{
+	background-color:rgba(0,255,0,0.3);
+	position:absolute;
+}
     </style>
     <script>
 
@@ -83,6 +88,8 @@
     </script>
 </head>
 <body>
+        <div class="select-square" id="selectSquare"></div>
+
     <ol id="selectable">
         <li class="ui-state-default">1</li>
         <li class="ui-state-default">2</li>
@@ -106,42 +113,81 @@
                 var isDragging = false;
 
                 var container = document.getElementById("selectable");
+              
+                var selectSquare = document.getElementById("selectSquare");
+
+               
+                var children = [].slice.call(container.childNodes).filter(function (node) {
+                        return node.nodeName == "LI";
+                });
+
+                var boundingBoxes = children.map(function (node, index) {
+
+                        return { x: node.offsetLeft + .5 * node.offsetWidth, y: node.offsetTop + .5 * node.offsetHeight, width: node.offsetWidth, height: node.offsetHeight, index: index };
+
+                });
+
+                
+
+                var dragStart = null;
+
 
                 addEventListener("mousedown", function (event) {
                         event.preventDefault();
+                        dragStart = { x: event.clientX, y: event.clientY };
+                        selectSquare.style.left = event.clientX + 'px';
+                        selectSquare.style.top = event.clientY + 'px';
+                        selectSquare.style.width = 0;
+                        selectSquare.style.height = 0;
                         isDragging = true;
-                        selectThisDiv(event.target);
+                        selectSquare.style.display = "block";
 
                 });
 
                 addEventListener("mouseup", function (event) {
+                        selectSquare.style.display = "none";
+                        var dragEnd = { x: event.clientX, y: event.clientY };
+
+                        var maxX = Math.max(dragEnd.x, dragStart.x);
+                        var minX = Math.min(dragEnd.x, dragStart.x);
+                        var maxY = Math.max(dragEnd.y, dragStart.y);
+                        var minY = Math.min(dragEnd.y, dragStart.y);
+
+                        console.log(maxX, maxY, minX, minY);
+                        var selectedEls = boundingBoxes.filter(function (ele) {
+                                console.log(ele.x, maxX, minX);
+
+                                if (maxX < ele.x || (minX > ele.x) || (maxY < ele.y) || (minY > ele.y)) {
+                                        return false;
+                                }
+                                return true;
+                        });
+
+                        selectedEls.forEach(function (item) {
+                                children[item.index].setAttribute("dataOn", true);
+                        });
+
                         isDragging = false;
                 });
 
-                container.addEventListener("mouseover", function (event) {
-                        event.preventDefault();
-                        selectThisDiv(event.target);
+                addEventListener("mousemove", function (event) {
+                        
+                        if (isDragging === false) {
+                                return;
+                        }
+
+                        var minX = Math.min(event.clientX, dragStart.x);
+                        var maxX = Math.max(event.clientX, dragStart.x);
+                        var minY = Math.min(event.clientY, dragStart.y);
+                        var maxY = Math.max(event.clientY, dragStart.y);
+
+                        selectSquare.style.left = minX + 'px';
+                        selectSquare.style.top = minY + 'px';
+                        selectSquare.style.width = (maxX - minX) + 'px';
+                        selectSquare.style.height = (maxY - minY) + 'px';
 
                 });
 
-                var selectThisDiv = function (el) {
-
-
-                        if (isDragging == true && el.className == "ui-state-default") {
-
-                                var toToggleOff = el.getAttribute("dataOn");
-                              
-                                if (toToggleOff === "true") {
-
-                                        el.setAttribute("dataOn", false);
-                                }
-                                else {
-                                        el.setAttribute("dataOn", true);
-                                }
-
-                        }
-
-                };
 
                 window.ondragstart = function () {
                         return false;
