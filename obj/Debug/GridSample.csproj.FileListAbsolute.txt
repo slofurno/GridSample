@@ -23,3 +23,12 @@ C:\Users\hlyates\Documents\Visual Studio 2013\Projects\GridSample\GridSample\bin
 C:\Users\hlyates\Documents\Visual Studio 2013\Projects\GridSample\GridSample\obj\Debug\GridSample.csprojResolveAssemblyReference.cache
 C:\Users\hlyates\Documents\Visual Studio 2013\Projects\GridSample\GridSample\obj\Debug\GridSample.dll
 C:\Users\hlyates\Documents\Visual Studio 2013\Projects\GridSample\GridSample\obj\Debug\GridSample.pdb
+C:\Users\slofurno\Desktop\zz\GridSample\bin\GridSample.dll.config
+C:\Users\slofurno\Desktop\zz\GridSample\bin\GridSample.dll
+C:\Users\slofurno\Desktop\zz\GridSample\bin\GridSample.pdb
+C:\Users\slofurno\Desktop\zz\GridSample\bin\Antlr3.Runtime.pdb
+C:\Users\slofurno\Desktop\zz\GridSample\bin\Newtonsoft.Json.xml
+C:\Users\slofurno\Desktop\zz\GridSample\bin\System.Web.Optimization.xml
+C:\Users\slofurno\Desktop\zz\GridSample\obj\Debug\GridSample.csprojResolveAssemblyReference.cache
+C:\Users\slofurno\Desktop\zz\GridSample\obj\Debug\GridSample.dll
+C:\Users\slofurno\Desktop\zz\GridSample\obj\Debug\GridSample.pdb
