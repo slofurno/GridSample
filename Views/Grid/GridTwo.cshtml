@@ -16,6 +16,8 @@
             background: #FECA40;
         }
 
+
+
         #selectable .ui-selected {
             background: #512888;
             color: white;
@@ -37,10 +39,17 @@
                 font-size: 4em;
                 text-align: center;
             }
+
+                    .ui-state-default[dataOn=true]{
+	background-color: #512888;
+}
     </style>
     <script>
-  $(function() {
 
+
+
+  $(function() {
+/*
       var _selectRange = false, _deselectQueue = [];
       $(function () {
           $("#selectable").selectable({
@@ -69,13 +78,13 @@
               }
           });
       });
-
+      */
   });
     </script>
 </head>
 <body>
     <ol id="selectable">
-        <li class="ui-widget-content">1</li>
+        <li class="ui-state-default">1</li>
         <li class="ui-state-default">2</li>
         <li class="ui-state-default">3</li>
         <li class="ui-state-default">4</li>
@@ -88,6 +97,55 @@
         <li class="ui-state-default">11</li>
         <li class="ui-state-default">12</li>
     </ol>
+
+<script>
+
+
+        (function () {
+
+                var isDragging = false;
+
+                var container = document.getElementById("selectable");
+
+                addEventListener("mousedown", function (event) {
+                        event.preventDefault();
+                        isDragging = true;
+                        selectThisDiv(event.target);
+
+                });
+
+                addEventListener("mouseup", function (event) {
+                        isDragging = false;
+                });
+
+                container.addEventListener("mouseover", function (event) {
+                        event.preventDefault();
+                        selectThisDiv(event.target);
+
+                });
+
+                var selectThisDiv = function (el) {
+
+
+                        if (isDragging == true && el.className == "ui-state-default") {
+
+                                var toToggleOff = el.getAttribute("dataOn");
+                              
+                                if (toToggleOff === "true") {
+
+                                        el.setAttribute("dataOn", false);
+                                }
+                                else {
+                                        el.setAttribute("dataOn", true);
+                                }
+
+                        }
+
+                };
+
+        })();
+
+</script>
 </body>
 </html>
 
