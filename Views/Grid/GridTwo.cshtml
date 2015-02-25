@@ -121,9 +121,11 @@
                         return node.nodeName == "LI";
                 });
 
+
+                //the center of your elements for hit testing
                 var boundingBoxes = children.map(function (node, index) {
 
-                        return { x: node.offsetLeft + .5 * node.offsetWidth, y: node.offsetTop + .5 * node.offsetHeight, width: node.offsetWidth, height: node.offsetHeight, index: index };
+                        return { x: node.offsetLeft + .5 * node.offsetWidth, y: node.offsetTop + .5 * node.offsetHeight, index: index };
 
                 });
 
@@ -133,29 +135,34 @@
 
 
                 addEventListener("mousedown", function (event) {
+
                         event.preventDefault();
+
                         dragStart = { x: event.clientX, y: event.clientY };
+                        isDragging = true;
+
+                        //only for visual
                         selectSquare.style.left = event.clientX + 'px';
                         selectSquare.style.top = event.clientY + 'px';
                         selectSquare.style.width = 0;
-                        selectSquare.style.height = 0;
-                        isDragging = true;
+                        selectSquare.style.height = 0;                        
                         selectSquare.style.display = "block";
 
                 });
 
                 addEventListener("mouseup", function (event) {
                         selectSquare.style.display = "none";
+
                         var dragEnd = { x: event.clientX, y: event.clientY };
+                        isDragging = false;
 
                         var maxX = Math.max(dragEnd.x, dragStart.x);
                         var minX = Math.min(dragEnd.x, dragStart.x);
                         var maxY = Math.max(dragEnd.y, dragStart.y);
                         var minY = Math.min(dragEnd.y, dragStart.y);
 
-                        console.log(maxX, maxY, minX, minY);
-                        var selectedEls = boundingBoxes.filter(function (ele) {
-                                console.log(ele.x, maxX, minX);
+                        //check if you've drawn a square around your elements center
+                        var selectedEls = boundingBoxes.filter(function (ele) {                               
 
                                 if (maxX < ele.x || (minX > ele.x) || (maxY < ele.y) || (minY > ele.y)) {
                                         return false;
@@ -167,7 +174,7 @@
                                 children[item.index].setAttribute("dataOn", true);
                         });
 
-                        isDragging = false;
+                        
                 });
 
                 addEventListener("mousemove", function (event) {
@@ -188,7 +195,7 @@
 
                 });
 
-
+                //prevents undesired visual drag
                 window.ondragstart = function () {
                         return false;
                 };
