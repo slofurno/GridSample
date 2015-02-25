@@ -16,8 +16,9 @@
     <!--This should be at the bottom, but for demo purposes has been placed on the top-->
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.11.3.min.js"></script>
-    <script src="~/Scripts/typeahead.bundle.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+    <script src="~/Scripts/lookup.js"></script>
     @RenderSection("scripts", required: false)
 </head>
 <body>
@@ -38,7 +39,7 @@
                 <ul class="nav navbar-nav">
 
                     <li><a href="@Url.Action("Index", "Home")"><span class="fa fa-home"></span> Home</a></li>
-                    <li><a href="@Url.Action("Search", "TextAhead")">Text Ahead</a></li>
+                    <li><a href="@Url.Action("TypeAhead", "TextAhead")">Text Ahead</a></li>
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Grid Samples <b class="fa fa-caret-down"></b></a>
